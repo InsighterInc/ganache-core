@@ -18,6 +18,18 @@ contract EstimateGas {
         tests.length++;
     }
 
+    uint256 public x;
+
+    function depth(uint256 y) public {
+        if (y > 0) {
+            depth(y - 1);
+        }
+        else {
+            // Save the remaining gas in storage so that we can access it later
+            x = gasleft();
+        }
+    }
+
     function add(bytes32 _name, bytes32 _description, uint _value) returns(bool) {
         if (index[_name] != 0) {
             return false;
